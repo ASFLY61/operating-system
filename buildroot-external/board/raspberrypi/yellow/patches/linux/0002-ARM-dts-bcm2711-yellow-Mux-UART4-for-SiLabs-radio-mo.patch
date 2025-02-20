@@ -1,32 +1,31 @@
-From e2b56e7d8786f7000c3159346b6cf2360ad3c8c3 Mon Sep 17 00:00:00 2001
-Message-Id: <e2b56e7d8786f7000c3159346b6cf2360ad3c8c3.1641591965.git.stefan@agner.ch>
-In-Reply-To: <9d68dedb813f942286856c9d8c2eed01b55bb473.1641591965.git.stefan@agner.ch>
-References: <9d68dedb813f942286856c9d8c2eed01b55bb473.1641591965.git.stefan@agner.ch>
+From 7bc3b341d90c95dc17d3da0930801006b00d2046 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Thu, 4 Mar 2021 14:33:09 +0100
-Subject: [PATCH 2/9] ARM: dts: bcm2711: yellow: Mux UART4 for SiLabs radio
- module
+Subject: [PATCH] ARM: dts: bcm2711: yellow: Mux UART4 for SiLabs radio module
 
 Enable UART4 by default and mux pins including hardware flow control.
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
- arch/arm/boot/dts/bcm2711-rpi-cm4-ha-yellow.dts | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ .../dts/broadcom/bcm2711-rpi-cm4-ha-yellow.dts   | 16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/boot/dts/bcm2711-rpi-cm4-ha-yellow.dts b/arch/arm/boot/dts/bcm2711-rpi-cm4-ha-yellow.dts
-index 5d4e058cac43..6b702d66ac55 100644
---- a/arch/arm/boot/dts/bcm2711-rpi-cm4-ha-yellow.dts
-+++ b/arch/arm/boot/dts/bcm2711-rpi-cm4-ha-yellow.dts
-@@ -21,6 +21,7 @@ memory@0 {
- 	};
+diff --git a/arch/arm/boot/dts/broadcom/bcm2711-rpi-cm4-ha-yellow.dts b/arch/arm/boot/dts/broadcom/bcm2711-rpi-cm4-ha-yellow.dts
+index f92936d7cf16b..fa93ab5ca639b 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2711-rpi-cm4-ha-yellow.dts
++++ b/arch/arm/boot/dts/broadcom/bcm2711-rpi-cm4-ha-yellow.dts
+@@ -15,6 +15,10 @@ / {
+ 	compatible = "raspberrypi,4-compute-module-ha-yellow", "raspberrypi,4-compute-module", "brcm,bcm2711";
+ 	model = "Raspberry Pi Compute Module 4 on Home Assistant Yellow";
  
- 	aliases {
++	aliases {
 +		serial4 = &uart4;
- 		emmc2bus = &emmc2bus;
- 		ethernet0 = &genet;
- 		pcie0 = &pcie0;
-@@ -321,6 +322,14 @@ &uart1 {
++	};
++
+ 	chosen {
+ 		/* 8250 auxiliary UART instead of pl011 */
+ 		stdout-path = "serial1:115200n8";
+@@ -243,6 +247,14 @@ &uart1 {
  	status = "okay";
  };
  
@@ -38,10 +37,10 @@ index 5d4e058cac43..6b702d66ac55 100644
 +	status = "okay";
 +};
 +
- &vchiq {
- 	interrupts = <GIC_SPI 34 IRQ_TYPE_LEVEL_HIGH>;
+ &vc4 {
+ 	status = "okay";
  };
-@@ -549,9 +558,9 @@ uart3_pins: uart3_pins {
+@@ -467,9 +479,9 @@ uart3_pins: uart3_pins {
  	};
  
  	uart4_pins: uart4_pins {
@@ -53,6 +52,3 @@ index 5d4e058cac43..6b702d66ac55 100644
  	};
  
  	uart5_pins: uart5_pins {
--- 
-2.34.1
-
